@@ -30,13 +30,21 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "server": "src/main.server.ts"
           },
           "configurations": {
+            "prerender": {
+              "prerender": {
+                "discoverRoutes": true,
+                "routesFile": "routes.txt"
+              }
+            },
+            "ssr": {
+              "outputMode": "server",
+              "ssr": {
+                "entry": "src/server.ts"
+              }
+            },
             "production": {
               "budgets": [
                 {
@@ -58,16 +66,16 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "production,ssr"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-ssg-example:build:production"
+              "buildTarget": "angular-ssg-example:build:ssr,production"
             },
             "development": {
-              "buildTarget": "angular-ssg-example:build:development"
+              "buildTarget": "angular-ssg-example:build:ssr,development"
             }
           },
           "defaultConfiguration": "development"
